@@ -1,0 +1,25 @@
+<h1>New Appointment</h1>
+
+<%= form_with model: @appointment do |form| %>
+	<div>
+		<%= form.label :title %><br>
+		<%= form.text_field :title %>
+		<% @appointment.errors.full_messages_for(:title).each do |message| %>
+			<div><%= message %></div>
+		<% end %>
+	</div>
+
+	<%= render "info", appointment: @appointment, patient: @patient %>
+	
+	<%= form.hidden_field :start, value: @appointment.start.utc %>
+	<%= form.hidden_field :end, value: @appointment.end.utc %>
+	<%= form.hidden_field :patient_id, value: @appointment.patient_id %>
+
+	<div>
+		<%= form.submit %>
+	</div>
+<% end %>
+
+<br><br>
+
+<%= link_to "Back", root_path %><br>

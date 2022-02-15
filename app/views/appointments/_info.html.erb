@@ -1,0 +1,3 @@
+Patient: <%= patient.name %> <%= patient.surname %><br>
+Date: <%= appointment.start.to_date %><br>
+Time: <%= appointment.start.time.localtime.strftime("%H:%M") %> - <%= appointment.end.time.localtime.strftime("%H:%M") %><br>

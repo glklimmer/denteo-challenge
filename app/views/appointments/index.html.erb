@@ -1,0 +1,34 @@
+<h1>Settings</h1>
+
+<form action="/">
+	Patient: 
+	<select name="patient" id="patient-select">
+		<% @patients.each do |patient| %>
+			<option <%= patient.id == @patient.id ? "selected" : "" %> value=<%= patient.id %>><%= patient.name %> <%= patient.surname %></option>
+		<% end %>
+	</select><br>
+	Search Start: <input type="date" name="start" id="start" value=<%= @searchStart %>><br>
+	Search End: <input type="date" name="end" id="end" value=<%= @searchEnd %>><br>
+
+	<input type="submit" value="Search">
+</form>
+
+<h1>Appointments</h1>
+
+<ul>
+  <% @appointments.each do |appointment| %>
+    <li>
+      <%= link_to appointment.title, appointment %> ( <%= appointment.start.localtime %> - <%= appointment.end.localtime %> )
+    </li>
+  <% end %>
+</ul>
+
+<h1>Slots</h1>
+
+<ul>
+  <% @slots.each do |slot| %>
+    <li>
+      <%= slot %> <%= link_to "Choose", new_appointment_path(:slot => slot, :patient_id => @patient.id) %>
+    </li>
+  <% end %>
+</ul>
